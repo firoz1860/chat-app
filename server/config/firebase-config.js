@@ -14,24 +14,52 @@
 
 
 
-
-
-
 import { initializeApp, cert } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import fs from "fs";
 
-// Safely read the JSON key
-const serviceAccountKey = JSON.parse(
-  fs.readFileSync(new URL("./serviceAccountKey.json", import.meta.url))
-);
+// 🔹 Detect whether we're using a JSON string or file path
+let serviceAccountKey;
 
-// Initialize Firebase Admin
+try {
+  if (process.env.FIREBASE_CREDENTIALS?.startsWith("{")) {
+    // 🔹 Case: JSON string from env (e.g. on Render)
+    serviceAccountKey = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+  } else {
+    // 🔹 Case: Local file path (e.g. ./serviceAccountKey.json during dev)
+    const keyPath = new URL(process.env.FIREBASE_CREDENTIALS, import.meta.url);
+    serviceAccountKey = JSON.parse(fs.readFileSync(keyPath));
+  }
+} catch (err) {
+  console.error("❌ Firebase credentials not loaded properly:", err.message);
+  process.exit(1); // Stop app if credentials are invalid
+}
+
+// 🔹 Initialize Firebase Admin
 const app = initializeApp({
   credential: cert(serviceAccountKey),
 });
 
 const auth = getAuth(app);
 export default auth;
+
+
+
+// import { initializeApp, cert } from "firebase-admin/app";
+// import { getAuth } from "firebase-admin/auth";
+// import fs from "fs";
+
+// // Safely read the JSON key
+// const serviceAccountKey = JSON.parse(
+//   fs.readFileSync(new URL(process.env.FIREBASE_CREDENTIALS, import.meta.url))
+// );
+
+// // Initialize Firebase Admin
+// const app = initializeApp({
+//   credential: cert(serviceAccountKey),
+// });
+
+// const auth = getAuth(app);
+// export default auth;
 
 

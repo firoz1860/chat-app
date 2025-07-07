@@ -22,17 +22,6 @@ export function AuthProvider({ children }) {
   function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
-  // function register(email, password) {
-  // return createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     console.log("✅ Registered:", userCredential.user);
-  //     return userCredential.user;
-  //   })
-  //   .catch((error) => {
-  //     console.error("❌ Register error:", error.code, error.message);
-  //     throw error; // rethrow so it can be caught in Register.jsx
-  //   });
-// }
 
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
