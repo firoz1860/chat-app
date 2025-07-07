@@ -2,8 +2,8 @@ import axios from "axios";
 import auth from "../config/firebase";
 import { io } from "socket.io-client";
 
-const baseURL = "http://localhost:3001/api";
-// const baseURL = process.env.VITE_API_URL;
+// const baseURL = "http://localhost:3001/api";
+const baseURL = process.env.API_BASE_URL;
 
 const getUserToken = async () => {
   const user = auth.currentUser;
