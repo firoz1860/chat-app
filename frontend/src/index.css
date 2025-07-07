@@ -1,0 +1,595 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables for Unique Design */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --dark-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-primary: 0 8px 32px rgba(102, 126, 234, 0.2);
+  --shadow-secondary: 0 8px 32px rgba(240, 147, 251, 0.2);
+  --shadow-glow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+/* Enhanced Base Styles */
+@layer base {
+  * {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950;
+    background-attachment: fixed;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* Smooth Scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 126, 234, 0.3) transparent;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 20px;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-gradient);
+  }
+}
+
+/* Enhanced Components */
+@layer components {
+  /* Glassmorphism Effect */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-primary);
+  }
+  
+  /* Modern Input Styling */
+  .modern-input {
+    @apply relative overflow-hidden bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm border border-white/20 dark:border-gray-700/30 rounded-2xl px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .modern-input:focus {
+    @apply outline-none border-blue-400/50 bg-white/20 dark:bg-gray-800/30;
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  /* Enhanced Chat Form Styling */
+  .chat-input-form {
+    @apply relative;
+  }
+  
+  .chat-input-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .chat-input-container {
+    background: rgba(17, 24, 39, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .message-input {
+    @apply transition-all duration-300;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .message-input:focus {
+    @apply ring-2 ring-blue-500/50 border-blue-400/50;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .emoji-button {
+    @apply relative overflow-hidden;
+  }
+  
+  .emoji-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 opacity-0 transition-opacity duration-300;
+  }
+  
+  .emoji-button:hover::before {
+    @apply opacity-100;
+  }
+  
+  .send-button {
+    @apply relative overflow-hidden;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  }
+  
+  .send-button::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+  }
+  
+  .send-button:hover::before {
+    @apply opacity-100;
+  }
+  
+  .send-button:active {
+    @apply scale-95;
+    box-shadow: 0 2px 8px rgba(79, 172, 254, 0.4);
+  }
+  
+  /* Gradient Buttons */
+  .btn-primary {
+    background: var(--primary-gradient);
+    @apply text-white border-0 rounded-2xl px-6 py-3 font-medium shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95;
+  }
+  
+  .btn-secondary {
+    background: var(--secondary-gradient);
+    @apply text-white border-0 rounded-2xl px-6 py-3 font-medium shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95;
+  }
+  
+  .btn-accent {
+    background: var(--accent-gradient);
+    @apply text-white border-0 rounded-2xl px-6 py-3 font-medium shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95;
+  }
+  
+  /* Enhanced Chat Containers */
+  .chat-container {
+    @apply glass-card rounded-3xl overflow-hidden;
+    background: rgba(255, 255, 255, 0.95);
+  }
+  
+  .dark .chat-container {
+    background: rgba(17, 24, 39, 0.95);
+  }
+  
+  /* Message Bubbles */
+  .message-bubble {
+    @apply rounded-3xl px-4 py-3 max-w-xs shadow-lg backdrop-blur-sm;
+    animation: messageSlideIn 0.3s ease-out;
+  }
+  
+  .message-sent {
+    background: var(--primary-gradient);
+    @apply text-white ml-auto;
+    border-radius: 20px 20px 5px 20px;
+  }
+  
+  .message-received {
+    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white mr-auto border border-gray-200 dark:border-gray-700;
+    border-radius: 20px 20px 20px 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Contact List Items */
+  .contact-item {
+    @apply p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:bg-white/50 dark:hover:bg-gray-800/50 hover:transform hover:scale-[1.02] hover:shadow-lg;
+  }
+  
+  .contact-item.active {
+    background: var(--accent-gradient);
+    @apply text-white shadow-lg;
+  }
+  
+  /* Avatar Enhancements */
+  .avatar {
+    @apply rounded-full border-4 border-white shadow-lg;
+    background: var(--primary-gradient);
+  }
+  
+  .avatar-online::after {
+    content: '';
+    @apply absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white;
+    background: var(--success-gradient);
+    animation: pulse 2s infinite;
+  }
+  
+  /* Header Styling */
+  .header-nav {
+    @apply glass-card border-b-0 rounded-none;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+  }
+  
+  .dark .header-nav {
+    background: rgba(17, 24, 39, 0.8);
+  }
+  
+  /* Form Containers */
+  .auth-form {
+    @apply glass-card rounded-3xl p-8 w-full max-w-md;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  .dark .auth-form {
+    background: rgba(17, 24, 39, 0.9);
+  }
+  
+  /* Search Bar */
+  .search-container {
+    @apply relative;
+  }
+  
+  .search-input {
+    @apply modern-input pl-12 w-full;
+  }
+  
+  .search-icon {
+    @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500;
+  }
+  
+  /* Theme Toggle Button */
+  .theme-toggle {
+    @apply p-3 rounded-2xl transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-800/20 hover:scale-110;
+  }
+  
+  /* Profile Avatar Selection */
+  .avatar-selector {
+    @apply rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+  }
+  
+  .avatar-selector.selected {
+    @apply ring-4 ring-blue-400 ring-opacity-75 shadow-xl transform scale-105;
+  }
+  
+  /* Welcome Screen */
+  .welcome-container {
+    @apply flex flex-col items-center justify-center h-full p-8 text-center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  }
+  
+  /* Error Messages */
+  .error-message {
+    @apply glass-card border-red-300 bg-red-50/50 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-2xl;
+  }
+  
+  /* Modal Overlays */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50;
+  }
+  
+  .modal-content {
+    @apply glass-card rounded-3xl p-6 max-w-md w-full mx-4;
+    background: rgba(255, 255, 255, 0.95);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+  
+  .dark .modal-content {
+    background: rgba(17, 24, 39, 0.95);
+  }
+}
+
+/* Enhanced Emoji Picker Styling */
+.emoji-picker-react {
+  @apply glass-card border-0 rounded-3xl overflow-hidden !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: var(--shadow-primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .emoji-picker-react {
+  background: rgba(17, 24, 39, 0.95) !important;
+  border: 1px solid rgba(75, 85, 99, 0.3) !important;
+}
+
+.emoji-picker-react .emoji-search {
+  @apply bg-white/10 dark:bg-gray-800/20 border border-white/20 dark:border-gray-700/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-xl !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.emoji-picker-react .emoji-categories {
+  @apply bg-white/10 dark:bg-gray-800/20 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar {
+  @apply w-2 !important;
+}
+
+.emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient) !important;
+  border-radius: 10px !important;
+}
+
+.emoji-picker-react .emoji-categories button {
+  @apply rounded-xl transition-all duration-300 hover:bg-white/20 dark:hover:bg-gray-700/50 !important;
+}
+
+.emoji-picker-react .emoji-scroll-wrapper .emoji-group::before {
+  @apply bg-white/10 dark:bg-gray-800/20 text-gray-900 dark:text-white rounded-xl !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.emoji-picker-react .emoji-group-before {
+  @apply text-gray-900 dark:text-white !important;
+}
+
+.emoji-picker-react .emoji-preview {
+  @apply bg-white/10 dark:bg-gray-800/20 !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Custom Animations */
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Hover Effects and Micro-interactions */
+.hover-lift {
+  @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl;
+}
+
+.hover-glow {
+  @apply transition-all duration-300;
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* Loading Animations */
+.loading-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0));
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Typography Enhancements */
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 768px) {
+  .chat-container {
+    @apply rounded-none;
+  }
+  
+  .auth-form {
+    @apply rounded-2xl mx-4;
+  }
+  
+  .modal-content {
+    @apply rounded-2xl;
+  }
+  
+  .emoji-picker-react {
+    width: 300px !important;
+    height: 350px !important;
+  }
+}
+
+/* Dark Mode Specific Enhancements */
+.dark {
+  color-scheme: dark;
+}
+
+.dark .glass-card {
+  background: rgba(17, 24, 39, 0.1);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.dark .modern-input {
+  @apply bg-gray-800/20 border-gray-700/30 text-white;
+}
+
+.dark .modern-input:focus {
+  @apply border-blue-400/50 bg-gray-800/30;
+}
+
+/* Custom Focus States */
+.focus-ring {
+  @apply focus:outline-none focus:ring-4 focus:ring-blue-400/30 focus:border-blue-400;
+}
+
+/* Status Indicators */
+.status-online {
+  @apply bg-green-400 animate-pulse;
+}
+
+.status-offline {
+  @apply bg-gray-400;
+}
+
+.status-typing {
+  @apply bg-yellow-400 animate-bounce;
+}
+
+/* Chat Room Specific Styles */
+.chat-room-header {
+  @apply glass-card rounded-t-3xl border-b border-white/20 dark:border-gray-700/30;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.dark .chat-room-header {
+  background: rgba(17, 24, 39, 0.9);
+}
+
+.chat-messages-container {
+  @apply p-6 space-y-4 overflow-y-auto;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.3));
+}
+
+.dark .chat-messages-container {
+  background: linear-gradient(to bottom, rgba(17,24,39,0.5), rgba(17,24,39,0.3));
+}
+
+/* Enhanced Button States */
+.btn-primary:disabled {
+  @apply opacity-50 cursor-not-allowed transform-none hover:scale-100;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.btn-ghost {
+  @apply bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-white/10 dark:hover:bg-gray-800/10;
+}
+
+/* Notification Badges */
+.notification-badge {
+  @apply absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse;
+}
+
+/* Profile Page Enhancements */
+.profile-container {
+  @apply max-w-2xl mx-auto p-6;
+}
+
+.avatar-grid {
+  @apply grid grid-cols-3 gap-4 mb-6;
+}
+
+/* Enhanced Form Elements */
+.form-group {
+  @apply space-y-2;
+}
+
+.form-label {
+  @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+}
+
+.form-error {
+  @apply text-sm text-red-600 dark:text-red-400;
+}
+
+/* Utility Classes */
+.backdrop-blur-glass {
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+.text-gradient-primary {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-secondary {
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient {
+  border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+}
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.emoji-picker-react {
+  @apply bg-white dark:bg-gray-800
+  }
+
+  .emoji-picker-react .emoji-search {
+    @apply dark:bg-gray-800  dark:text-white dark:border-gray-700 dark:focus:border-sky-500
+    }
+  
+    .emoji-picker-react .emoji-categories  {
+      @apply dark:bg-gray-800;
+      }
+
+      .emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar {
+        @apply dark:bg-gray-800 w-5
+      }
+
+      .emoji-picker-react .emoji-categories button  {
+        @apply contrast-0
+        }
+
+      .emoji-picker-react .emoji-scroll-wrapper .emoji-group::before {
+        @apply dark:bg-gray-800  dark:text-white
+      }
+
+  @layer base {
+    body {
+      @apply bg-white dark:bg-gray-900;
+    }
+  } */
+
+  
